@@ -27,3 +27,19 @@ This tool is intended to mass download arts for MTG Cards using MTGPics with Scr
 - You can choose whether to download all available arts or only one art
 - You can choose whether to ignore fullarts (supported only when download all is enabled)
 - You can choose whether to download scryfall arts as a fallback
+- You can set embedded mode to:
+- - **false** to run in prompt mode (the default)
+- - **file** to automatically run Decklist mode (option 1)
+- - **sheet** to automatically run Google Sheet mode (option 2)
+
+# Docker
+- Build the docker image, using `docker build -t mtg-art-downloader`
+- Set your config to one of the embedded modes (`file` or `sheet`)
+- Run the docker image, using the following:
+```
+docker run --rm \
+-v $(PWD)/config.ini:/app/config.ini \
+-v $(PWD)/details.txt:/app/details.txt \
+-v $(PWD)/downloaded/:/app/downloaded/ \
+mtg-art-downloader
+```
