@@ -85,8 +85,11 @@ def txt_downloader ():
 	# Close the txt file
 	failed.close()
 
-	print("\nAll available files downloaded.\nSee failed.txt for images that couldn't be located.\nPress enter to exit :)")
-	input()
+	if settings.embedded_mode == False:
+		print("\nAll available files downloaded.\nSee failed.txt for images that couldn't be located.\nPress enter to exit :)")
+		input()
+	else:
+		print("\nAll available files downloaded.\nSee failed.txt for images that couldn't be located :)")
 	sys.exit()
 
 def sheet_downloader ():
@@ -125,8 +128,11 @@ def sheet_downloader ():
 	# Close the txt file
 	failed.close()
 
-	print("\nAll available files downloaded.\nSee failed.txt for images that couldn't be located.\nPress enter to exit :)")
-	input()
+	if settings.embedded_mode == False:
+		print("\nAll available files downloaded.\nSee failed.txt for images that couldn't be located.\nPress enter to exit :)")
+		input()
+	else:
+		print("\nAll available files downloaded.\nSee failed.txt for images that couldn't be located :)")
 	sys.exit()
 
 print(f"{Fore.YELLOW}{Style.BRIGHT}\n  ██████╗ ███████╗████████╗    ███╗   ███╗████████╗ ██████╗ ")
@@ -144,19 +150,28 @@ print(f" ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝       ╚═╝  �
 print(f"{Fore.CYAN}{Style.BRIGHT}MTG Art Downloader by Mr Teferi")
 print(f"Additional credit to Trix are for Scoot + Gikkman")
 print(f"http://mpcfill.com --- Support great MTG Proxies!{Style.RESET_ALL}\n")
-z = 0
-while z == 0:
-	# Does the user want to use Google Sheet queeries or cards from txt file?
-	print("Enter 1 to download arts from cardname list in cards.txt.\nEnter 2 to download images from \"set--name\" list in detailed.txt.\nFor help using this app, visit: tinyurl.com/mtg-art-dl")
-	choice = input()
-	
-	# Import our Google Sheets generated queeries
-	if choice == "1":
-		z = 1
-		print("\nCan do! Grab yourself a beer, we might be here a minute..")
+
+if settings.embedded_mode != False: 
+	if settings.embedded_mode == "file":
+		print("\nRunning file mode! Grab yourself a beer, we might be here a minute..")
 		txt_downloader()
-	elif choice == "2":
-		z = 1
-		print("\nCan do! Grab yourself a beer, we might be here a minute..")
+	elif settings.embedded_mode == "sheet":
+		print("\nRunning sheet mode! Grab yourself a beer, we might be here a minute..")
 		sheet_downloader()
-	else: print("\nDo you think this is a game? Try again.\n")
+else:
+	z = 0
+	while z == 0:
+		# Does the user want to use Google Sheet queeries or cards from txt file?
+		print("Enter 1 to download arts from cardname list in cards.txt.\nEnter 2 to download images from \"set--name\" list in detailed.txt.\nFor help using this app, visit: tinyurl.com/mtg-art-dl")
+		choice = input()
+		
+		# Import our Google Sheets generated queeries
+		if choice == "1":
+			z = 1
+			print("\nCan do! Grab yourself a beer, we might be here a minute..")
+			txt_downloader()
+		elif choice == "2":
+			z = 1
+			print("\nCan do! Grab yourself a beer, we might be here a minute..")
+			sheet_downloader()
+		else: print("\nDo you think this is a game? Try again.\n")

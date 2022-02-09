@@ -31,5 +31,11 @@ else: unique = "prints"
 if config['SETTINGS'].getboolean('If.Missing.Download.Scryfall'): download_scryfall = True
 else: download_scryfall = False
 
+# CLI Mode
+if config['SETTINGS'].get("Embedded.Mode") == "file": embedded_mode = "file"
+elif config['SETTINGS'].get("Embedded.Mode") == "sheet": embedded_mode = "sheet"
+else: embedded_mode = False
+
+
 # Refer to this for generating detailed list
 # https://docs.google.com/spreadsheets/d/1QnVoQ1gvz1N4TKnkJJ44_FHomy0gNoxZlaPSkua4Rmk/edit?usp=sharing
